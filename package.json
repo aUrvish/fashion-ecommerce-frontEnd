@@ -15,6 +15,7 @@
     "nuxt-icon": "^0.4.2"
   },
   "dependencies": {
-    "@nuxtjs/google-fonts": "^3.0.2"
+    "@nuxtjs/google-fonts": "^3.0.2",
+    "nuxt-swiper": "^1.2.0"
   }
 }
