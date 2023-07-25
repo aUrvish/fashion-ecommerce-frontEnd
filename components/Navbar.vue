@@ -43,6 +43,7 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
 <style scoped lang="scss">
 .dd-header {
     padding-top: 5px;   
+    z-index: 99;
     .dd-container {
         width: 90%;
         max-width: 1536px;

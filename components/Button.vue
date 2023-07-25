@@ -26,6 +26,6 @@
         padding: 5px 20px;
         border-radius: 20px;
         color: white !important;
-        box-shadow: 0 10px 20px -9px $color;
+        box-shadow: 0 10px 8px -9px $color;
     }
 </style>

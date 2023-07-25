@@ -9,8 +9,10 @@
 
 .dd-default {
     position: relative;
+    height: 100%;
     .navbar {
-        position: sticky;
+        position: fixed;
+        width: 100%;
         top: 0%;
     }
 }
