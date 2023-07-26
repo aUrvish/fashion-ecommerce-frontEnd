@@ -1,5 +1,5 @@
 <script setup>
-const getBtnColor = ref('red')
+const getBtnColor = ref('#ce071e')
 const bgColor = ref('white')
 const navToggleBtn = ref(false)
 const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
@@ -9,7 +9,7 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
     <header class="dd-header">
         <div class="dd-container">
             <NuxtLink :to="{ name: 'index' }" class="dd-logo">
-                <img src="@/assets/images/logo.svg" alt="Logo">
+                <img src="@/assets/images/logo-light.svg" alt="Logo">
             </NuxtLink>
 
             <ul class="dd-nav">
@@ -84,7 +84,7 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
                         content: attr(data-cart-list);
                         color: white;
                         position: absolute;
-                        background-color: v-bind(getBtnColor);
+                        background-color: red;
                         height: 13px;
                         width: 13px;
                         border-radius: 50%;
