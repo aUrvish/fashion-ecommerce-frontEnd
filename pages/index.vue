@@ -1,3 +1,8 @@
 <template>
-    <h1>Index page</h1>
+    <NuxtLayout name="default">
+        <div style="height: 100%;">
+            <HomeHeroSlide/>
+            <h1>Home page</h1>
+        </div>
+    </NuxtLayout>
 </template>
