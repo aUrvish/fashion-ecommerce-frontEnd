@@ -6,6 +6,7 @@
 
 
 <style lang="scss">
+
 body , html , #__nuxt, .dd-app {
   padding: 0;
   margin: 0;
