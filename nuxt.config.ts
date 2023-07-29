@@ -5,10 +5,13 @@ export default defineNuxtConfig({
     ['@nuxtjs/google-fonts', {
       families: {
         'Nunito': true,
+        'Poppins': true,
+        'Teko': true,
         download: true,
         inject: true
       }
     }] ,
-    'nuxt-swiper'
+    'nuxt-swiper',
+    'nuxt-rating'
   ] ,
 })
