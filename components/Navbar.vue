@@ -1,5 +1,5 @@
 <script setup>
-const getBtnColor = ref('#ce071e')
+const getBtnColor = ref('#000')
 const bgColor = ref('white')
 const navToggleBtn = ref(false)
 const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
