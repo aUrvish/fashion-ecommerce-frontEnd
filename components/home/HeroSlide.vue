@@ -1,18 +1,18 @@
 <template>
-    <div style="height: 100%;" >
+    <div style="height: 100%;">
 
-        <swiper direction="horizontal" :slidesPerView="1" :spaceBetween="30" :mousewheel="{
+        <swiper @slideChange="slideChangeFunc" direction="horizontal" :slidesPerView="1" :spaceBetween="30" :mousewheel="{
             forceToAxis: false,
             sensitivity: 1,
             releaseOnEdges: true,
         }" :modules="[Mousewheel]" class="mySwiper">
-            <SwiperSlide v-for="(item , index) in itemapi">
-                <div class="dd-leftside" :style="{backgroundColor : item.backColor}">
+            <SwiperSlide v-for="(item, index) in itemapi">
+                <div class="dd-leftside" :style="{ backgroundColor: item.backColor }">
                     <div class="dd-fashion-head">New Fashion</div>
                     <img :src="item.img" alt="product_slide">
                     <div class="dd-slide-desc">
                         <p>{{ item.desc }}</p>
-                        <Button text="Show Details" bgColor="#fff" color="#000" radius="5px" />
+                        <Button class="dd-hero-btn" text="Show Details" bgColor="#fff" color="#000" radius="5px" />
                     </div>
                 </div>
                 <div class="dd-rightside">
@@ -22,8 +22,8 @@
                             <div>
                                 <p>{{ item.subProduct[0].desc }}</p>
                                 <strong>{{ item.subProduct[0].price }}</strong>
-                                <NuxtRating :read-only="true" ratingSize="1.5vw" inactiveColor="#fff" 
-                                :ratingValue="item.subProduct[0].rate" />
+                                <NuxtRating :read-only="true" ratingSize="1.5vw" inactiveColor="#fff"
+                                    :ratingValue="item.subProduct[0].rate" />
                                 <Icon name="mdi:arrow-right-thin-circle-outline" class="dd-ads-btn" />
                             </div>
                         </div>
@@ -33,9 +33,10 @@
                     <div class="dd-cus-slide">
                         <div class="dd-slide-div">
                             <Icon name="mdi:arrow-left-thin-circle-outline" @click="miniSlide > 0 ? miniSlide-- : ''" />
-                            <Icon name="mdi:arrow-right-thin-circle-outline" @click="item.subProduct.filter((curr , ind) => ind > 0).length > miniSlide + 1? miniSlide++ : ''" />
+                            <Icon name="mdi:arrow-right-thin-circle-outline"
+                                @click="item.subProduct.filter((curr, ind) => ind > 0).length > miniSlide + 1 ? miniSlide++ : ''" />
                         </div>
-                        <template v-for="(subitem , i) in item.subProduct.filter((curr , ind) => ind > 0)" :key="i">
+                        <template v-for="(subitem, i) in item.subProduct.filter((curr, ind) => ind > 0)" :key="i">
                             <div class="dd-slide-card" v-show="i == miniSlide">
                                 <Icon class="dd-card-icon" name="mdi:arrow-right-thin" />
                                 <img :src="subitem.img" class="dd-card-img" alt="shoes">
@@ -59,128 +60,135 @@ import { Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+
 const miniSlide = ref(0)
+
+const btnTest = ref('#000')
+
+const slideChangeFunc = () => {
+
+}
 
 
 const itemapi = reactive(
     [
         {
-            img : 'http://localhost:3000/_nuxt/assets/images/shirt.png',
-            backColor : '#9bafca',
-            desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
-            subProduct : [
+            img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt.png',
+            backColor: '#9bafca',
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
+            subProduct: [
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shirt-green.png',
-                    name : 'New Fashion',
-                    brand : "Levi's",
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png',
+                    name: 'New Fashion',
+                    brand: "Levi's",
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shirt-orange.png',
-                    name : 'New Fashion',
-                    brand : "Levi's",
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-orange.png',
+                    name: 'New Fashion',
+                    brand: "Levi's",
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shirt-red.png',
-                    name : 'New Fashion',
-                    brand : "Levi's",
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-red.png',
+                    name: 'New Fashion',
+                    brand: "Levi's",
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shirt.png',
-                    name : 'New Fashion',
-                    brand : "Levi's",
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt.png',
+                    name: 'New Fashion',
+                    brand: "Levi's",
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
             ]
-        } ,
+        },
         {
-            img : 'http://localhost:3000/_nuxt/assets/images/shoes.png',
-            backColor : '#07aea0',
-            desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
-            subProduct : [
+            img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes.png',
+            backColor: '#07aea0',
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
+            subProduct: [
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shoes-ads.png',
-                    name : 'New Fashion',
-                    brand : 'Nike',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-ads.png',
+                    name: 'New Fashion',
+                    brand: 'Nike',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shoes-blue.png',
-                    name : 'New Fashion',
-                    brand : 'Nike',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-blue.png',
+                    name: 'New Fashion',
+                    brand: 'Nike',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shoes.png',
-                    name : 'New Fashion',
-                    brand : 'Nike',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes.png',
+                    name: 'New Fashion',
+                    brand: 'Nike',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/shoes-green.png',
-                    name : 'New Fashion',
-                    brand : 'Nike',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-green.png',
+                    name: 'New Fashion',
+                    brand: 'Nike',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
             ]
-        } ,
+        },
         {
-            img : 'http://localhost:3000/_nuxt/assets/images/watch.png',
-            backColor : '#c7c7c7',
-            desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
-            subProduct : [
+            img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch.png',
+            backColor: '#c7c7c7',
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
+            subProduct: [
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
-                    name : 'New Fashion',
-                    brand : 'Noise',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    name: 'New Fashion',
+                    brand: 'Noise',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
-                    name : 'New Fashion',
-                    brand : 'Noise',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    name: 'New Fashion',
+                    brand: 'Noise',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
-                    name : 'New Fashion',
-                    brand : 'Noise',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    name: 'New Fashion',
+                    brand: 'Noise',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
                 {
-                    img : 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
-                    name : 'New Fashion',
-                    brand : 'Noise',
-                    desc : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
-                    price : '₹ 500.00',
-                    rate : '4.5'
+                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    name: 'New Fashion',
+                    brand: 'Noise',
+                    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
+                    price: '₹ 500.00',
+                    rate: 4.5
                 },
             ]
-        } ,
+        },
     ]
 )
 
@@ -198,8 +206,7 @@ const itemapi = reactive(
 
         .dd-leftside {
             width: 100%;
-            animation: slideDown .5s ease-in ;
-            
+
             img {
                 position: absolute;
                 bottom: 0;
@@ -207,7 +214,7 @@ const itemapi = reactive(
                 width: 30%;
                 transform: translateX(-50%);
             }
-            
+
             .dd-fashion-head {
                 position: absolute;
                 top: 50%;
@@ -216,10 +223,10 @@ const itemapi = reactive(
                 white-space: nowrap;
                 font-size: 10vw;
                 white-space: nowrap;
-                color: rgba(0, 0, 0 , 0.15);
+                color: rgba(0, 0, 0, 0.15);
                 font-weight: 900;
             }
-            
+
             .dd-slide-desc {
                 position: absolute;
                 margin-left: 7%;
@@ -232,7 +239,7 @@ const itemapi = reactive(
 
         .dd-rightside {
             width: 100%;
-            
+
             .dd-mini-ads {
                 width: 20vw;
                 height: 10vh;
@@ -375,16 +382,59 @@ const itemapi = reactive(
                         .dd-card-icon {
                             display: block;
                         }
-                    } 
+                    }
                 }
 
                 @keyframes slide {
                     0% {
                         opacity: 0;
                     }
+
                     100% {
                         opacity: 1;
                     }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 991px) {
+        .swiper-slide {
+            flex-direction: column;
+
+            .dd-leftside {
+                height: 70%;
+
+                img {
+                    width: auto;
+                    height: 50%;
+                }
+
+                .dd-fashion-head {
+                    font-size: 13vw;
+                    transform: translate(-50%, 0%);
+                }
+
+                .dd-slide-desc {
+                    top: 0%;
+                    transform: translate(0% ,100%);
+                    font-size: 4vw;
+                    width: 100%;
+                    margin: 0;
+
+                    p , .dd-hero-btn {
+                        margin: 20px 20px;
+                    }
+                }
+            }
+
+            .dd-rightside {
+                .dd-mini-ads {
+                    display: none;
+                }
+
+                .dd-cus-slide {
+                    display: none;
                 }
             }
         }

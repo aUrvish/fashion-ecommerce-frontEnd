@@ -1,15 +1,15 @@
 <script setup>
-const getBtnColor = ref('#000')
+const getBtnColor = ref('linear-gradient(120deg,#42d392,#647eff)')
 const bgColor = ref('white')
 const navToggleBtn = ref(false)
 const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
 </script>
 
 <template>
-    <header class="dd-header">
+    <header class="dd-header" :style="{backgroundColor:navToggleBtn?'white':'transparent'}">
         <div class="dd-container">
             <NuxtLink :to="{ name: 'index' }" class="dd-logo">
-                <img src="@/assets/images/logo-light.svg" alt="Logo">
+                <img src="@/assets/images/logo-dark.svg" alt="Logo">
             </NuxtLink>
 
             <ul class="dd-nav">
@@ -26,7 +26,7 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
                     <NavbarLink>Contact</NavbarLink>
                 </li>
                 <li>
-                    <Button class="dd-nav-btn" text="Login" :bgColor="getBtnColor" />
+                    <Button class="dd-nav-btn" text="Login" :bgImg="getBtnColor" />
                 </li>
                 <li>
                     <NuxtLink :to="{ name: 'about' }" class="dd-call-icon" data-cart-list="10">
@@ -113,7 +113,6 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
     }
 
     @media screen and (max-width : 991px) {
-        background-color: v-bind(bgColor);
         .dd-container {
             width: 100%;
             display: block;
