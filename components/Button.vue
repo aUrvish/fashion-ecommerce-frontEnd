@@ -1,7 +1,10 @@
 <script setup>
 defineProps({
     bgColor: {
-        default: 'red'
+        default: '#fff'
+    },
+    bgImg: {
+        default: '#fff'
     },
     to: {
         default: '#'
@@ -26,10 +29,12 @@ defineProps({
 
 <style lang="scss" scoped>
 $color : v-bind(bgColor);
+$Img : v-bind(bgImg);
 
 a {
     text-decoration: none;
     background-color: $color;
+    background-image: $Img;
     padding: 5px 20px;
     border-radius: v-bind(radius);
     font-family: 'Nunito';
