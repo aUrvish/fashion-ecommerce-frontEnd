@@ -55,7 +55,7 @@ onMounted(
 
 <style scoped lang="scss">
 .dd-header {
-    padding-top: 5px;   
+    padding: 5px 0;   
     z-index: 99;
     .dd-container {
         width: 90%;

@@ -65,7 +65,7 @@ const companyApi = [
             align-items: center;
             display: flex;
             width: fit-content;
-            animation: companyAnimation 120s ease-in-out infinite;
+            animation: companyAnimation 120s linear infinite;
 
             img {
                 flex: 1 1 0px;
@@ -74,14 +74,10 @@ const companyApi = [
 
             @keyframes companyAnimation {
                 0% {
-                    transform: translateX(0%);
+                    transform: translateX(50%);
                 }
 
-                50% {
-                    transform: translateX(100%);
-                }
-
-                50% {
+                100% {
                     transform: translateX(-100%);
                 }
             }
@@ -98,7 +94,7 @@ const companyApi = [
             background-image: linear-gradient(to right ,black 50% , transparent);
             top: 0;
             left: 0;
-            z-index: 99;
+            z-index: 98;
             content: "";
         }
         
@@ -109,7 +105,7 @@ const companyApi = [
             background-image: linear-gradient(to right ,transparent , black 50%);
             top: 0;
             right: 0;
-            z-index: 99;
+            z-index: 98;
             content: "";
         }
     }
