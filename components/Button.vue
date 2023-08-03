@@ -1,15 +1,24 @@
 <script setup>
-    defineProps({
-            bgColor: {
-                default : 'red'
-            } ,
-            to : {
-                default : '#'
-            } , 
-            text : {
-                require : true
-            }
-    })
+defineProps({
+    bgColor: {
+        default: '#fff'
+    },
+    bgImg: {
+        default: '#fff'
+    },
+    to: {
+        default: '#'
+    },
+    text: {
+        require: true
+    },
+    color: {
+        default: "#fff"
+    },
+    radius: {
+        default: "20px"
+    }
+})
 </script>
 
 <template>
@@ -19,13 +28,18 @@
 </template>
 
 <style lang="scss" scoped>
-    $color : v-bind(bgColor);
+$color : v-bind(bgColor);
+$Img : v-bind(bgImg);
 
-    a {
-        background-color: $color;
-        padding: 5px 20px;
-        border-radius: 20px;
-        color: white !important;
-        box-shadow: 0 10px 8px -9px $color;
-    }
+a {
+    text-decoration: none;
+    background-color: $color;
+    background-image: $Img;
+    padding: 5px 20px;
+    border-radius: v-bind(radius);
+    font-family: 'Nunito';
+    font-weight: bold;
+    color: v-bind(color) !important;
+    box-shadow: 0 10px 8px -9px $color;
+}
 </style>

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.0.2",
+    "nuxt-rating": "^0.0.15",
     "nuxt-swiper": "^1.2.0"
   }
 }
