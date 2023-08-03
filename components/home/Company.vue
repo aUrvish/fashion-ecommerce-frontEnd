@@ -14,34 +14,34 @@
 <script setup>
 const companyApi = [
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Logo.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Logo.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Calypso.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Calypso.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/ColdGecko.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/ColdGecko.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/EdgeKart.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/EdgeKart.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/InfinityParker.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/InfinityParker.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Kinetic.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Kinetic.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/PacificTrim.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/PacificTrim.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Pastel&Co..svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Pastel&Co..svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Wheelapp.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Wheelapp.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/YellowBook.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/YellowBook.svg'
     },
 ]
 </script>
