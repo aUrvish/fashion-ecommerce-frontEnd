@@ -4,6 +4,7 @@
             <HomeHeroSlide/>
             <HomeCompany/>
             <HomeCategory/>
+            <HomeOffer/>
             <HomeBanner/>
             <h1>Hello would </h1>
         </div>

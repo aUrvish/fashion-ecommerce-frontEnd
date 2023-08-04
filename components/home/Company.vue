@@ -51,7 +51,7 @@ const companyApi = [
     margin-top: 0;
     background-color: black;
     color: white;
-    padding: 25px 0;
+    padding: 15px 0;
 
 
     .dd-max-div {

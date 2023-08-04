@@ -22,7 +22,7 @@
     .dd-cat {
         display: grid;
         width: 90%;
-        max-width: 1536;
+        max-width: 1536px;
         margin: 50px auto;
         grid-template-columns: repeat(3 , 1fr);
         gap: 20px;
