@@ -1,12 +1,25 @@
 <script setup>
 const getBtnColor = ref('linear-gradient(120deg,#42d392,#647eff)')
-const bgColor = ref('white')
 const navToggleBtn = ref(false)
 const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
+const bgColor = ref('transparent')
+
+onMounted(
+  () => {
+    window.addEventListener('scroll' , () => { 
+        console.log(window.scrollY);
+        if(window.scrollY > 50){
+            bgColor.value = '#fff'
+        }else {
+            bgColor.value = 'transparent'
+        }
+    })
+  }
+)
 </script>
 
 <template>
-    <header class="dd-header" :style="{backgroundColor:navToggleBtn?'white':'transparent'}">
+    <header class="dd-header" :style="{backgroundColor:navToggleBtn?'white':bgColor}">
         <div class="dd-container">
             <NuxtLink :to="{ name: 'index' }" class="dd-logo">
                 <img src="@/assets/images/logo-dark.svg" alt="Logo">
@@ -42,7 +55,7 @@ const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
 
 <style scoped lang="scss">
 .dd-header {
-    padding-top: 5px;   
+    padding: 5px 0;   
     z-index: 99;
     .dd-container {
         width: 90%;
