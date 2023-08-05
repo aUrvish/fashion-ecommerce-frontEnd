@@ -3,8 +3,10 @@
         <div style="height: 100%;">
             <HomeHeroSlide/>
             <HomeCompany/>
-            <HomeCategory/>
+            <HomeService/>
             <HomeOffer/>
+            <HomeCategory/>
+            <HomeTrend/>
             <HomeBanner/>
             <h1>Hello would </h1>
         </div>

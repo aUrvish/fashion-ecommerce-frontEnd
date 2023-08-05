@@ -16,7 +16,7 @@
         }
 
         @media screen and (max-width : 991px) {
-            margin: 10px auto;
+            margin: 50px auto;
         }
     }
 

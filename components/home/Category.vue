@@ -38,5 +38,10 @@
                 }
             }
         }
+        
+        @media screen and (max-width: 991px) {
+            margin: 100px auto;
+            grid-template-columns: 1fr;
+        }
     }
 </style>

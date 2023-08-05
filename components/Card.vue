@@ -35,6 +35,7 @@
         
         .dd-card-head {
             border-radius: 10px;
+            border: 1px solid rgba(100, 126, 255, .5);
             overflow: hidden;
             aspect-ratio: 1/1;
             width: 100%;
@@ -118,6 +119,10 @@
                     margin-left: 10px;
                 }
             }
+        }
+
+        @media screen and (max-width:991px) {
+            padding: 15px 0 ;
         }
     }
 </style>
