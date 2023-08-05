@@ -14,16 +14,16 @@
 <script setup>
 const companyApi = [
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Logo.svg'
+        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/mantis.svg'
     },
     {
         logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Calypso.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/ColdGecko.svg'
+        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/grass.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/EdgeKart.svg'
+        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/country.svg'
     },
     {
         logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/InfinityParker.svg'
@@ -35,7 +35,7 @@ const companyApi = [
         logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/PacificTrim.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Pastel&Co..svg'
+        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/omega.svg'
     },
     {
         logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Wheelapp.svg'
@@ -74,7 +74,7 @@ const companyApi = [
 
             @keyframes companyAnimation {
                 0% {
-                    transform: translateX(50%);
+                    transform: translateX(100%);
                 }
 
                 100% {

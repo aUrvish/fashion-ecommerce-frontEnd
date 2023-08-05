@@ -1,16 +1,17 @@
 <template>
-    <div class="dd-offer">
-        <div class="dd-offer-head">
+    <div class="dd-trend">
+        <div class="dd-trend-head">
             <div>
-                <h2>Best Offer</h2>
+                <h2>Trending Collection</h2>
                 <p>Check out most promising product bought by our buyers</p>
             </div>
             <NuxtLink to="/">
                 Show More
+                <!-- <Icon name="mdi:arrow-right-thin"/> -->
             </NuxtLink>
         </div>
-        <div class="dd-cart-offer">
-            <Card v-for="i in 4" :key="i" />
+        <div class="dd-cart-trend">
+            <Card v-for="i in 12" :key="i"/>
         </div>
         <p class="dd-moble-show">
             <NuxtLink to="/">
@@ -21,24 +22,25 @@
 </template>
 
 <style lang="scss" scoped>
-.dd-offer {
+
+.dd-trend {
     width: 90%;
     margin: 0 auto;
     max-width: 1536px;
     font-family: 'Nunito';
 
-    .dd-offer-head {
+    .dd-trend-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
-
-        h2 {
+        
+        h2{
             font-size: 30px;
             margin: 0;
         }
-
-        p {
+        
+        p{
             margin: 0;
         }
 
@@ -48,9 +50,9 @@
         }
     }
 
-    .dd-cart-offer {
+    .dd-cart-trend {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4 , 1fr);
     }
 
     .dd-moble-show {
@@ -64,18 +66,17 @@
 
     @media screen and (max-width: 991px) {
 
-        .dd-cart-offer {
-            grid-template-columns: repeat(2, 1fr);
+        .dd-cart-trend {
+            grid-template-columns: repeat(2, 1fr) ;
         }
     }
-
     @media screen and (max-width: 600px) {
 
-        .dd-cart-offer {
-            grid-template-columns: repeat(1, 1fr);
+        .dd-cart-trend {
+            grid-template-columns: repeat(1, 1fr) ;
         }
 
-        .dd-offer-head {
+        .dd-trend-head {
             a {
                 display: none;
             }
