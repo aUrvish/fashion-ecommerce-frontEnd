@@ -7,8 +7,6 @@
             <HomeOffer/>
             <HomeCategory/>
             <HomeTrend/>
-            <HomeBanner/>
-            <h1>Hello would </h1>
         </div>
     </NuxtLayout>
 </template>

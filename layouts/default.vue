@@ -1,7 +1,9 @@
 <template>
     <div class="dd-default">
         <Navbar class="navbar"/>
-        <slot></slot>
+        <slot/>
+        <Banner />
+        <Footer/>
     </div>
 </template>
 
@@ -9,7 +11,6 @@
 
 .dd-default {
     position: relative;
-    height: 100%;
     .navbar {
         position: fixed;
         width: 100%;

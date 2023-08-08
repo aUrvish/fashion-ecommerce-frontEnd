@@ -127,7 +127,7 @@ onMounted(
 
     @media screen and (max-width : 991px) {
         .dd-container {
-            width: 100%;
+            width: 95%;
             display: block;
 
             .dd-nav-collapse {
