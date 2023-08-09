@@ -134,7 +134,6 @@ footer {
             .dd-footer-sub-head {
                 margin-top: 0;
                 color: #fff;
-                opacity: .3;
             }
 
             .dd-add , .dd-email , .dd-phone {
@@ -164,7 +163,6 @@ footer {
                 .dd-footer-sub-head {
                     margin-top: 0;
                     color: #fff;
-                    opacity: .3;
                 }
                 
                 p > a {
@@ -181,7 +179,6 @@ footer {
                 .dd-footer-sub-head {
                     margin-top: 0;
                     color: #fff;
-                    opacity: .3;
                 }
                 
                 p > a {
