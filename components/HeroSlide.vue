@@ -197,7 +197,7 @@ const itemapi = reactive(
 <style scoped lang="scss">
 .swiper {
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     .swiper-slide {
         display: flex;

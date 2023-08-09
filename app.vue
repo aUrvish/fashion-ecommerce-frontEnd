@@ -7,7 +7,7 @@
 
 <style lang="scss">
 
-body , html , #__nuxt, .dd-app {
+body , html{
   padding: 0;
   margin: 0;
   box-sizing: border-box ;
