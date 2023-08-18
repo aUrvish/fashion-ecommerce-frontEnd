@@ -9,7 +9,7 @@
                     <img src="../assets/images/about.png" alt="AboutUs" style="width: 100%;">
                 </div>
                 <div class="dd-about-text">
-                    <h1>About pages</h1>
+                    <h1>About Us</h1>
                     <p>
                         Welcome to Desi Dukaan, your ultimate destination for a seamless online shopping experience. As
                         passionate

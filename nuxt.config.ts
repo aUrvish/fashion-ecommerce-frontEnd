@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       }
     }] ,
     'nuxt-swiper',
-    'nuxt-rating'
+    'nuxt-rating',
+    '@nuxtjs/tailwindcss'
   ] ,
 })

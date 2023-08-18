@@ -35,18 +35,24 @@ const companyApi = [
 
 <template>
     <NuxtLayout name="default">
-        <div class="dd-home">
+        <div>
 
             <!-- hero slide  -->
             <HeroSlide />
 
             <!-- company logos -->
-            <div class="dd-company">
-                <div class="dd-max-div">
-                    <div>
-
+            <div class="mt-0 bg-black text-white py-4">
+                <div class="dd-max-div
+                container 
+                mx-auto 
+                w-[90%] 
+                relative 
+                overflow-hidden 
+                lg:pt-0 
+                pt-3">
+                    <div class="dd-logo-img items-center flex w-fit">
                         <template v-for="(item, index) in companyApi" :key="item">
-                            <img :src="item.logo" :alt="index">
+                            <img :src="item.logo" class="flex-1 mx-6" :alt="index">
                         </template>
                     </div>
                 </div>
@@ -54,19 +60,19 @@ const companyApi = [
 
             <!-- our sevices -->
             <div class="dd-service">
-                <div class="s1">
+                <div>
                     <Icon name="fa6-solid:truck-fast" class="icon" />
                     <p>Super Fast and Free Delivery</p>
                 </div>
-                <div class="s2">
+                <div>
                     <Icon name="mdi:security" class="icon" />
                     <p>Non-contact Shipping</p>
                 </div>
-                <div class="s3">
+                <div>
                     <Icon name="fa6-solid:money-bill-1-wave" class="icon" />
                     <p>Money-back Guaranteed</p>
                 </div>
-                <div class="s4">
+                <div>
                     <Icon name="fa6-solid:money-check-dollar" class="icon" />
                     <p>Super Secure Payment System</p>
                 </div>
@@ -78,22 +84,29 @@ const companyApi = [
             </ShortList>
 
             <!-- category -->
-            <div class="dd-cat">
-                <div class="dd-cat-female">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-female.png" alt="">
-                    </NuxtLink>
-                </div>
-                <div class="dd-cat-child">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-child.png" alt="">
-                    </NuxtLink>
-                </div>
-                <div class="dd-cat-male">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-male.png" alt="">
-                    </NuxtLink>
-                </div>
+            <div
+                class="container 
+                mx-auto 
+                lg:my-[50px] 
+                my-[100px] 
+                w-[90%] 
+                grid 
+                grid-cols-1 
+                gap-[20px] 
+                [&>*]:rounded-[10px] 
+                [&>*]:overflow-hidden 
+                [&>*]:shadow-lg 
+                [&>*:hover]:shadow-md 
+                lg:grid-cols-3">
+                <NuxtLink to="#">
+                    <img src="@/assets/images/cat-female.png" alt="cat1">
+                </NuxtLink>
+                <NuxtLink to="#">
+                    <img src="@/assets/images/cat-child.png" alt="cat2">
+                </NuxtLink>
+                <NuxtLink to="#">
+                    <img src="@/assets/images/cat-male.png" alt="cat3">
+                </NuxtLink>
             </div>
 
             <!-- trending collection -->
@@ -104,165 +117,51 @@ const companyApi = [
     </NuxtLayout>
 </template>
 
-<style scoped lang="scss">
-.dd-home {
+<style scoped>
+.dd-max-div::after {
+    @apply absolute w-[3%] h-full bg-gradient-to-r from-black to-transparent top-0 left-0 content-[''] z-50
+}
 
+.dd-max-div::before {
+    @apply absolute w-[3%] h-full bg-gradient-to-r from-transparent to-black top-0 right-0 content-[''] z-50
+}
 
-    // company logos
-    .dd-company {
-        margin-top: 0;
-        background-color: black;
-        color: white;
-        padding: 15px 0;
+.dd-logo-img {
+    animation: companyAnimation 120s linear infinite;
+}
 
+.dd-logo-img:hover {
+    animation-play-state: paused;
+}
 
-        .dd-max-div {
-            max-width: 1536px;
-            width: 90%;
-            margin: 0 auto;
-            overflow-x: hidden;
-            position: relative;
+.dd-service {
+    @apply font-['Nunito'] my-12 mx-auto w-[90%] container sm:grid block items-center grid-cols-3 gap-7
+}
 
-            div {
-                align-items: center;
-                display: flex;
-                width: fit-content;
-                animation: companyAnimation 120s linear infinite;
+.dd-service>* {
+    @apply text-center border border-[#647eff80] p-4 grid items-center text-lg rounded-[16px] bg-gradient-to-br from-[#42dd924d] to-[#647eff4d] text-black shadow-lg font-semibold my-4 sm:my-0
+}
 
-                img {
-                    flex: 1 1 0px;
-                    margin: 0 25px;
-                }
+.dd-service>*:first-child {
+    @apply row-start-1 row-end-3 h-1/2
+}
 
-                @keyframes companyAnimation {
-                    0% {
-                        transform: translateX(100%);
-                    }
+.dd-service>*:last-child {
+    @apply row-start-1 row-end-3 col-start-3 col-end-4 h-1/2
+}
 
-                    100% {
-                        transform: translateX(-100%);
-                    }
-                }
+.icon {
+    @apply text-[45px] mx-auto text-black mb-1
+}
 
-                &:hover {
-                    animation-play-state: paused;
-                }
-            }
-
-            &::after {
-                position: absolute;
-                width: 3%;
-                height: 100%;
-                background-image: linear-gradient(to right, black 50%, transparent);
-                top: 0;
-                left: 0;
-                z-index: 98;
-                content: "";
-            }
-
-            &::before {
-                position: absolute;
-                width: 3%;
-                height: 100%;
-                background-image: linear-gradient(to right, transparent, black 50%);
-                top: 0;
-                right: 0;
-                z-index: 98;
-                content: "";
-            }
-        }
-
-        @media screen and (max-width:991px) {
-            padding: 10px 0;
-        }
+@keyframes companyAnimation {
+    0% {
+        transform: translateX(100%);
     }
 
-
-    // our services
-    .dd-service {
-        font-family: 'Nunito';
-        margin: 50px auto;
-        width: 90%;
-        max-width: 1536px;
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(3, 1fr);
-        overflow: hidden;
-        gap: 2rem;
-
-        .s1,
-        .s2,
-        .s3,
-        .s4 {
-            text-align: center;
-            border: 1px solid rgba(100, 126, 255, .5);
-            padding: 16px;
-            display: grid;
-            place-items: center;
-            font-size: 1.5rem;
-            border-radius: 16px;
-            background-image: linear-gradient(to bottom right, rgba(66, 211, 146, .3), rgba(100, 126, 255, 0.3));
-            color: #000;
-            box-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);
-
-            .icon {
-                font-size: 45px;
-            }
-        }
-
-
-        .s1 {
-            grid-row: 1/3;
-            height: 50%;
-        }
-
-        .s4 {
-            height: 50%;
-            grid-row: 1/3;
-            grid-column: 3/4;
-        }
-
-
-        @media (max-width: 600px) {
-            display: block;
-
-            .s1,
-            .s2,
-            .s3,
-            .s4 {
-                margin: 15px 0;
-            }
-        }
-    }
-
-
-    // category
-    .dd-cat {
-        display: grid;
-        width: 90%;
-        max-width: 1536px;
-        margin: 50px auto;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-
-        .dd-cat-female,
-        .dd-cat-male,
-        .dd-cat-child {
-            img {
-                width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .4);
-
-                &:hover {
-                    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .15);
-                }
-            }
-        }
-
-        @media screen and (max-width: 991px) {
-            margin: 100px auto;
-            grid-template-columns: 1fr;
-        }
+    100% {
+        transform: translateX(-150%);
     }
 }
 </style>
+

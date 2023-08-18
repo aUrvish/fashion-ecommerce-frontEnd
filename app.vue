@@ -4,7 +4,7 @@
   </div>
 </template>
 
-
+<style src="@/assets/scss/main.scss"></style>
 <style lang="scss">
 
 body , html{
