@@ -7,8 +7,8 @@
 <style scoped lang="scss">
     .dd-baner-div {
         max-width: 1536px;
-        width: 90%;
-        margin: 25px auto;
+        width: 100%;
+        margin: 25px auto 0;
 
         img {
             width: 100%;
