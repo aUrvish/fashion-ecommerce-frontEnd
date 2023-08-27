@@ -39,10 +39,10 @@
                 <div>
                     <h4 class="dd-footer-sub-head">Pages</h4>
                     <p>
-                        <NuxtLink to="#">Contact US</NuxtLink>
+                        <NuxtLink :to="{name : 'contact'}">Contact US</NuxtLink>
                     </p>
                     <p>
-                        <NuxtLink to="#">About US</NuxtLink>
+                        <NuxtLink :to="{name : 'about'}">About US</NuxtLink>
                     </p>
                     <p>
                         <NuxtLink to="#">All Products</NuxtLink>

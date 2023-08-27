@@ -15,11 +15,11 @@ body , html{
 }
 
 ::-webkit-scrollbar {
-  width: .8vw;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444; 
+  background: #999; 
   border: 1px solid transparent;
   background-clip: padding-box;
   border-radius: 20px;

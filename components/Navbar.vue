@@ -8,7 +8,7 @@ onMounted(
   () => {
     window.addEventListener('scroll' , () => { 
         console.log(window.scrollY);
-        if(window.scrollY > 50){
+        if(window.scrollY > 5){
             bgColor.value = '#fff'
         }else {
             bgColor.value = 'transparent'
@@ -30,13 +30,13 @@ onMounted(
                     <NavbarLink :to="{ name: 'index' }">Home</NavbarLink>
                 </li>
                 <li>
-                    <NavbarLink :to="{ name: 'about' }">Product</NavbarLink>
+                    <NavbarLink :to="{ name: 'product' }">Product</NavbarLink>
                 </li>
                 <li>
-                    <NavbarLink>fashion</NavbarLink>
+                    <NavbarLink :to="{ name: 'fashion' }">fashion</NavbarLink>
                 </li>
                 <li>
-                    <NavbarLink>Contact</NavbarLink>
+                    <NavbarLink :to="{ name: 'contact' }">Contact</NavbarLink>
                 </li>
                 <li>
                     <Button class="dd-nav-btn" text="Login" :bgImg="getBtnColor" />
