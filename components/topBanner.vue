@@ -25,7 +25,7 @@
     display: flex;
     width: 100%;
     aspect-ratio: 7 / 1;
-    background-image: url('@/assets/images/topBanner.png');
+    background-image: url('@/assets/images/topBanner2.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     
