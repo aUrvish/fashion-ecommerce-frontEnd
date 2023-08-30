@@ -1,9 +1,19 @@
 <template>
     <div class="dd-input-div">
-        <input type="text" placeholder="Name">
+        <input type="text" :placeholder="placeholder">
         <p>* error</p>
     </div>
 </template>
+
+<script setup>
+    const props = defineProps(
+        {
+            placeholder : {
+                default : 'Name'
+            }
+        }
+    )
+</script>
 
 <style scoped lang="scss">
     .dd-input-div {
@@ -16,10 +26,11 @@
             outline: none;
             padding: 0 10px;
             box-sizing: border-box;
+            background-color: transparent;
 
             &:focus {
                 outline: 1px solid #000;
-                outline-offset: 1px;
+                outline-offset: 2px;
             }
             
         } 

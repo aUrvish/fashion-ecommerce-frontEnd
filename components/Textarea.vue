@@ -19,7 +19,7 @@
 
             &:focus {
                 outline: 1px solid #000;
-                outline-offset: 1px;
+                outline-offset: 2px;
             }
         } 
 

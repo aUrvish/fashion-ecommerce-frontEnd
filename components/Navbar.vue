@@ -3,6 +3,7 @@ const getBtnColor = ref('linear-gradient(120deg,#42d392,#647eff)')
 const navToggleBtn = ref(false)
 const navDisplay = computed(() => navToggleBtn.value ? 'block' : 'none')
 const bgColor = ref('transparent')
+const router = useRouter()
 
 onMounted(
   () => {
@@ -39,10 +40,10 @@ onMounted(
                     <NavbarLink :to="{ name: 'contact' }">Contact</NavbarLink>
                 </li>
                 <li>
-                    <Button class="dd-nav-btn" text="Login" :bgImg="getBtnColor" />
+                    <Button class="dd-nav-btn" text="Login" :bgImg="getBtnColor" @click="router.push({ name : 'login'})" />
                 </li>
                 <li>
-                    <NuxtLink :to="{ name: 'about' }" class="dd-call-icon" data-cart-list="10">
+                    <NuxtLink :to="{ name: 'cart' }" class="dd-call-icon" data-cart-list="10">
                         <Icon name="mdi:cart" size="25px" />
                     </NuxtLink>
                 </li>
