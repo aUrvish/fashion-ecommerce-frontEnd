@@ -1,6 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+<<<<<<< Updated upstream
   devtools: { enabled: false },
+=======
+  devtools: { enabled: true },
+  runtimeConfig : {
+    public : {
+      baseURL : 'http://localhost/api'
+    }
+  },
+>>>>>>> Stashed changes
   modules: ['nuxt-icon',
     ['@nuxtjs/google-fonts', {
       families: {

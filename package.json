@@ -17,6 +17,11 @@
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.0.2",
+<<<<<<< Updated upstream
+=======
+    "axios": "^1.5.0",
+    "multi-range-slider-vue": "^1.1.4",
+>>>>>>> Stashed changes
     "nuxt-rating": "^0.0.15",
     "nuxt-swiper": "^1.2.0"
   }
