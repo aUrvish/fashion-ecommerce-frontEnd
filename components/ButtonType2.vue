@@ -14,12 +14,15 @@ defineProps({
     },
     radius: {
         default: "20px"
+    },  
+    type : {
+        default: 'text'
     }
 })
 </script>
 
 <template>
-    <button type="button">
+    <button :type="type">
         {{ text }}
     </button>
 </template>

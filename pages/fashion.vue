@@ -23,49 +23,70 @@
 
             <div class="dd-fashion-cat">
                 <!--  Shirts & Jeans -->
-                <ShortList head="Shirts & Jeans">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="jeans.length" head="Shirts & Jeans">
+                    <Card v-for="(carddata , index) in jeans" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Sarees -->
-                <ShortList head="Sarees">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="sarees.length" head="Sarees">
+                    <Card v-for="(carddata , index) in sarees" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Shoess -->
-                <ShortList head="Shoes">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="shoes.length" head="Shoes">
+                    <Card v-for="(carddata , index) in shoes" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Watches -->
-                <ShortList head="Watches">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="watches.length" head="Watches">
+                    <Card v-for="(carddata , index) in watches" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Sunglasses -->
-                <ShortList head="Sunglasses">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="sunglasses.length" head="Sunglasses">
+                    <Card v-for="(carddata , index) in sunglasses" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Kurtas -->
-                <ShortList head="Kurtas">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="kurtas.length" head="Kurtas">
+                    <Card v-for="(carddata , index) in kurtas" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Baby Boys -->
-                <ShortList head="Baby Boys">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="boys.length" head="Baby Boy">
+                    <Card v-for="(carddata , index) in boys" :carddata="carddata" :key="index" />
                 </ShortList>
 
                 <!--  Baby Girls -->
-                <ShortList head="Baby Girls">
-                    <Card v-for="i in 4" :key="i" />
+                <ShortList v-if="girls.length" head="Baby Girls">
+                    <Card v-for="(carddata , index) in girls" :carddata="carddata" :key="index" />
                 </ShortList>
             </div>
 
         </div>
     </NuxtLayout>
 </template>
+
+<script setup>
+const { baseURL } = useRuntimeConfig().public
+const alldata = ref([])
+
+onMounted(() => {
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => alldata.value = [...JSON.parse(result)])
+        .catch(error => console.log('error', error));
+})
+
+const jeans = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'jeans'))
+const sarees = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'sarees'))
+const shoes = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'shoes'))
+const watches = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'watches'))
+const sunglasses = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'sunglasses'))
+const kurtas = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'kurtas'))
+const boys = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'boys'))
+const girls = computed(() => alldata.value.filter((curr , index) => curr.ptype == 'girls'))
+</script>
 
 <style scoped lang="scss">
 .dd-fashion {

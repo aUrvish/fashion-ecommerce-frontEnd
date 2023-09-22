@@ -16,20 +16,47 @@
                 </div>
                 <div>
                     <Icon name="ic:baseline-shopping-bag" />
-                    <h4>Total Product</h4>
-                    <h2>180</h2>
+                    <h4>Active Product</h4>
+                    <h2>{{ fetchalldata?.length }}</h2>
                 </div>
             </div>
 
-            <Table>
-                <NuxtLink to="#">
-                    <Icon name="streamline:interface-arrows-expand-5-expand-small-bigger-retract-smaller-big"
-                        style="color: blue;" />
-                </NuxtLink>
+
+            <Table :data="fetchalldata" @searchData="(sVal) => filterdata(sVal)" v-if="fetchalldata">
+                <template #action="{ pid }">
+                    <NuxtLink :to="{ name: 'product-id', params: { id: pid } }">
+                        <Icon name="streamline:interface-arrows-expand-5-expand-small-bigger-retract-smaller-big"
+                            style="color: blue;" />
+                    </NuxtLink>
+                </template>
             </Table>
         </div>
     </NuxtLayout>
 </template>
+
+<script setup>
+const { baseURL } = useRuntimeConfig().public
+const fetchalldata = ref(null)
+
+const filterdata = (data) => {
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(
+            (result) => {
+                let newdata = JSON.parse(result);
+                fetchalldata.value = newdata.filter((curr) => curr.pname.toLowerCase().includes(data.toLowerCase()))
+            }
+        )
+        .catch(error => console.log('error', error));
+}
+
+onMounted(() => {
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => fetchalldata.value = JSON.parse(result))
+        .catch(error => console.log('error', error));
+})
+</script>
 
 <style scoped lang="scss">
 .main-dash {

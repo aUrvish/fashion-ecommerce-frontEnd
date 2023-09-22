@@ -1,7 +1,7 @@
 <template>
     <NuxtLayout name="app">
         <div class="dd-add">
-            <h1>Add Product</h1>
+            <h1>Modify Product</h1>
 
             <div class="dd-add-prduct">
                 <form ref="formEl" @submit.prevent="submitform(formEl)">
@@ -16,22 +16,10 @@
                         <input type="text" name="pname" v-model="formData.name" id="name" placeholder="product name"
                             required>
                     </div>
-                    <div class="dd-img">
-                        <label for="img">Upload Product Images</label>
-                        <br>
-                        <div class="dd-file" @click="() => image.click()">
-                            <p>click to upload</p>
-                            <input type="file" name="file[]" accept="image/*" @change="uploadImage(formEl)" ref="image"
-                                required multiple>
-                        </div>
-                        <div class="images" v-if="imagesUrl.length > 0">
-                            <img :src="img" class="dd-card-img" alt="card" v-for="(img, ind) in imagesUrl" :key="ind">
-                        </div>
-                    </div>
                     <div class="dd-cat">
                         <label for="cat">Catagory</label>
                         <br>
-                        <select id="cat" v-model="formData.catagory" name="cat">
+                        <select id="cat" v-model="formData.catagory" name="cate">
                             <option value="men">Men</option>
                             <option value="women">Women</option>
                             <option value="baby">Baby</option>
@@ -65,7 +53,8 @@
                     <div class="desc">
                         <label for="desc">Product Description</label>
                         <br>
-                        <textarea v-model="formData.description" rows="10" name="desc" id="desc" placeholder="text here.." required></textarea>
+                        <textarea v-model="formData.description" rows="10" name="desc" id="desc" placeholder="text here.."
+                            required></textarea>
                     </div>
 
                     <div class="dd-stock">
@@ -88,19 +77,7 @@
                         <br>
                         <input v-model="formData.brand" type="text" id="brand" placeholder="brand" name="brand">
                     </div>
-                    <div class="dd-color">
-                        <label for="color">Colors</label>
-                        <br>
-                        <input v-model="formData.color" type="color" name="color" id="color" required>
-                        <button type="button" class="colorBtn" @click="colors = [...colors, formData.color]">+</button>
-                        <input type="color" name="pcolor[]" style="display: none;" :value="color"
-                            v-for="(color, index) in colors" :key="index">
-                        <div style="display: flex;">
-                            <div v-for="(color, index) in colors" :style="{ backgroundColor: color, }" :key="index"
-                                class="sub-color"></div>
-                        </div>
-                    </div>
-                    <button type="submit" name="submit" @click="uploadImage()" class="submit">Submit</button>
+                    <button type="submit" name="submit" class="submit">Submit</button>
                 </form>
             </div>
             <Notification :msg="message.msg" :isError="message.isError" />
@@ -110,75 +87,58 @@
 
 <script setup>
 const { baseURL } = useRuntimeConfig().public
-const image = ref(null)
 const formEl = ref(null)
 const response = ref(null)
-const imagesUrl = ref([])
 const message = ref({ msg: '', isError: false })
-const colors = ref([])
 const gid = ref(null)
+const fetchalldata = ref(null)
+const route = useRoute()
 
-onMounted(() => {
-    gid.value = Math.floor(Math.random() * 10000000000000000);
-})
-
-const uploadImage = () => {
-    if (image.value.files.length >= 4) {
-        for (let i = 0; i < 4; i++) {
-            imagesUrl.value.push(window.URL.createObjectURL(image.value.files[i]))
-        }
-        message.value.msg = '';
-        message.value.isError = false
-    } else {
-        console.log('minimum 4');
-        message.value.msg = 'Please upload a minimum of 4 images';
-        message.value.isError = true
-    }
-    console.log(imagesUrl.value);
-}
 
 const submitform = async (form) => {
-    if (colors.value.length > 0) {
+    const fd = new FormData(form);
+    fetch(`${baseURL}/product/modify/`, {
+        method: 'POST',
+        body: fd,
+        redirect: 'follow'
+    })
+        .then(response => response.text())
+        .then(result => { response.value = JSON.parse(result); message.value.msg = response.value.message; message.value.isError = response.value.error })
+        .catch(error => { message.value.msg = 'Network Error', message.value.isError = true });
+}
 
-        const fd = new FormData(form);
-        fetch(`${baseURL}/product/add/`, {
-            method: 'POST',
-            body: fd,
-            redirect: 'follow'
+onMounted(() => { fetchrealdata() })
+
+const fetchrealdata = () => {
+    fetch(`${baseURL}/product/single/`, { method: 'POST', body: JSON.stringify({ id: route.params.id }), redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => {
+            fetchalldata.value = JSON.parse(result)
+            gid.value = fetchalldata.value.data.id; 
+            formData.name = fetchalldata.value.data.pname;
+            formData.catagory = fetchalldata.value.data.catagory;
+            formData.ptype = fetchalldata.value.data.ptype;
+            formData.psize = fetchalldata.value.data.size;
+            formData.description = fetchalldata.value.data.description;
+            formData.stock = fetchalldata.value.data.stock;
+            formData.brand = fetchalldata.value.data.brand;
+            formData.mrp = fetchalldata.value.data.mrp;
+            formData.sell = fetchalldata.value.data.sell;
         })
-            .then(response => response.text())
-            .then(result => { response.value = JSON.parse(result); message.value.msg = response.value.message; message.value.isError = response.value.error })
-            .catch(error => { message.value.msg = 'Network Error', message.value.isError = true });
+        .catch(error => console.log('error', error));
 
-        formData.name =null;
-        formData.image =null;
-        formData.catagory ='men';
-        formData.description =null;
-        formData.ptype = 'jeans',
-        formData.psize ='xl'
-        formData.stock =null;
-        formData.brand =null;
-        formData.color =null;
-        formData.mrp =null;
-        formData.sell =null;
-    }else {
-        message.value.msg = 'Color field are required'
-        message.value.isError = true
-    }
 }
 
 const formData = reactive({
     name: null,
-    image: null,
-    catagory: 'men',
-    ptype : 'jeans',
-    psize : 'xl',
+    catagory: '',
+    ptype : '',
+    psize : '',
     description: null,
     stock: null,
     brand: null,
-    color: null,
-    mrp : null,
-    sell : null
+    mrp: null,
+    sell: null
 })
 </script>
 

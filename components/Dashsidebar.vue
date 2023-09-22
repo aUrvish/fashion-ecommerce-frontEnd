@@ -18,7 +18,7 @@
                 </NuxtLink>
             </li>
             <li>
-                <NuxtLink exactActiveClass="active-bar" :to="{name : 'dashboard-modify'}">
+                <NuxtLink exactActiveClass="active-bar" :class="routes.name == 'dashboard-modify-id' ? 'active-bar' : ''" :to="{name : 'dashboard-modify'}">
                     <div>
                         <Icon name="mdi:basket-check" />
                         Modify Product
@@ -36,6 +36,10 @@
         </ul>
     </div>
 </template>
+
+<script setup>
+const routes = useRoute()
+</script>
 
 <style scoped lang="scss">
 .dd-sidebar {

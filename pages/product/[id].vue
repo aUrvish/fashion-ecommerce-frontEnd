@@ -1,39 +1,28 @@
 <template>
     <NuxtLayout to="default">
         <div class="dd-single-product">
-            <!-- <p class="prev-page">Home > Yellow T-Shirt</p> -->
             <div class="dd-single">
                 <div class="dd-product-images">
                     <div class="multi-images">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" alt="card">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" alt="card">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" alt="card">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" alt="card">
+                        <img :src="`${baseURL}/images/${img}`" alt="card"
+                            v-for="(img, index) in rowData.image.filter((curr, ind) => ind < 4)" :key="index"
+                            @click="selectImage = index">
                     </div>
                     <div class="single-images-div">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" class="single-images"
-                            alt="card">
+                        <img :src="`${baseURL}/images/${rowData.image[selectImage]}`" class="single-images" alt="card">
                     </div>
                 </div>
                 <div class="dd-product-info">
-                    <h1>Yellow T-Shirt</h1>
+
+                    <h1>{{ rowData.name }}</h1>
                     <div class="dd-single-rate">
-                        <NuxtRating class="dd-rate" :read-only="true" ratingSize="24px" inactiveColor="#eee"
-                            :ratingValue="3" />
-                        <p>(60 customers reviwe)</p>
+                        <Rate :ratevalue="ratecomval" class="dd-rate" />
+                        <p>({{ rowData.reviwe }} customers reviwe)</p>
                     </div>
-                    <p class="dd-mrp">MRP : <del>₹500.00</del></p>
-                    <p class="dd-price">₹ 499.00</p>
-                    <p class="dd-card-desc">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique debitis delectus ab mollitia
-                        obcaecati ratione illo dolore, provident quibusdam minima eum! Vel, eum cumque ab cum deserunt
-                        explicabo
-                        quidem totam?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique debitis delectus ab mollitia
-                        obcaecati ratione illo dolore, provident quibusdam minima eum! Vel, eum cumque ab cum deserunt
-                        explicabo
-                        quidem totam?
-                    </p>
+
+                    <p class="dd-mrp">MRP : <del>₹ {{ Number(rowData.mrp).toFixed(2) }}</del></p>
+                    <p class="dd-price">₹ {{ Number(rowData.sell).toFixed(2) }}</p>
+                    <p class="dd-card-desc">{{ rowData.description }}</p>
 
                     <div class="dd-service">
                         <div>
@@ -54,38 +43,112 @@
                         </div>
                     </div>
 
-                    <p class="available">Available : <strong> In stock </strong></p>
-                    <p class="id">ID : <strong> 0000000000000001 </strong></p>
-                    <p class="brand">Brand : <strong> Eva </strong></p>
+                    <p class="available">Available : <strong> {{ rowData.stock > 0 ? 'In stock' : 'Out of stock' }} </strong>
+                    </p>
+                    <p class="id">ID : <strong> {{ gid }} </strong></p>
+                    <p class="brand">Brand : <strong> {{ rowData.brand }} </strong></p>
 
                     <hr>
 
                     <p class="dd-color-para">Color :
 
                         <span class="dd-color">
-                            <button style="background-color: #fff; outline: 1px solid #555;"></button>
-                            <button style="background-color: #000;"></button>
-                            <button style="background-color: red;"></button>
-                            <button style="background-color: #6c745d;"></button>
-                            <button style="background-color: skyblue;"></button>
+                            <button
+                                :style="{ backgroundColor: col, outline: selectcolorIndex == index ? '1px solid #555' : 'none' }"
+                                v-for="(col, index) in rowData.color" :key="index"
+                                @click="selectcolorIndex = index, selectcolor = col"></button>
                         </span>
                     </p>
 
                     <div class="total-item">
-                        <button>-</button>
-                        <p>3</p>
-                        <button>+</button>
+                        <button @click="quantity < 2 ? '' : quantity--">-</button>
+                        <p>{{ quantity }}</p>
+                        <button @click="quantity > rowData.stock ? '' : quantity++">+</button>
                     </div>
 
-                    <Button bgColor="#3b71ca" text="Add to Cart" radius="5px" />
+                    <ButtonType2 bgColor="#3b71ca" text="Add to Cart" @click="addToCart" radius="5px" >Add to Cart</ButtonType2>
                 </div>
             </div>
         </div>
-            <ShortList head="T-Shirt">
-                <Card v-for="i in 4" :key="i" />
-            </ShortList>
+        <ShortList :head="rowData.catagory">
+            <Card v-for="(card , index) in [...alldata.filter((curr , ind) => curr.catagory == rowData.catagory)].filter((c , i) => i < 4)" :carddata="card" :key="i" />
+        </ShortList>
     </NuxtLayout>
 </template>
+
+<script setup>
+const { baseURL } = useRuntimeConfig().public
+const message = ref({ msg: '', isError: false })
+const fetchalldata = ref(null)
+const gid = ref(null)
+const route = useRoute()
+const ratevalue = ref(2)
+const ratecomval = computed(() => ratevalue)
+const selectImage = ref(0)
+const selectcolorIndex = ref(0)
+const selectcolor = ref(null)
+const quantity = ref(1)
+const alldata = ref([])
+
+const addToCart = () => {
+    if(JSON.parse(localStorage.getItem('fashion'))){
+        console.log("get");
+        localStorage.setItem('fashion', JSON.stringify([ ...JSON.parse(localStorage.getItem('fashion')) ,rowData]))
+    }else{
+        localStorage.setItem('fashion', JSON.stringify([rowData]))
+    }
+}
+
+onMounted(() => {
+    fetchrealdata();
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => alldata.value = [...JSON.parse(result)])
+        .catch(error => console.log('error', error));
+})
+
+const fetchrealdata = () => {
+    fetch(`${baseURL}/product/single/`, { method: 'POST', body: JSON.stringify({ id: route.params.id }), redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => {
+            fetchalldata.value = JSON.parse(result)
+            gid.value = fetchalldata.value.data.id;
+            rowData.name = fetchalldata.value.data.pname;
+            rowData.id = fetchalldata.value.data.id;
+            rowData.image = fetchalldata.value.data.image.split(',');
+            rowData.color = fetchalldata.value.data.color.split(',');
+            ratevalue.value = Number(fetchalldata.value.data.rate);
+            rowData.catagory = fetchalldata.value.data.catagory;
+            rowData.reviwe = fetchalldata.value.data.review;
+            rowData.ptype = fetchalldata.value.data.ptype;
+            rowData.psize = fetchalldata.value.data.size;
+            rowData.description = fetchalldata.value.data.description;
+            rowData.stock = fetchalldata.value.data.stock;
+            rowData.brand = fetchalldata.value.data.brand;
+            rowData.mrp = fetchalldata.value.data.mrp;
+            rowData.sell = fetchalldata.value.data.sell;
+        })
+        .catch(error => console.log('error', error));
+
+}
+
+const rowData = reactive({
+    id : null,
+    name: null,
+    image: [],
+    catagory: '',
+    reviwe: 0,
+    ptype: '',
+    psize: '',
+    color: [],
+    description: null,
+    stock: null,
+    brand: null,
+    mrp: null,
+    sell: null
+})
+
+</script>
 
 <style scoped lang="scss">
 .dd-single-product {
@@ -272,5 +335,4 @@
             }
         }
     }
-}
-</style>
+}</style>

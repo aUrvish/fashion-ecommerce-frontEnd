@@ -1,9 +1,40 @@
 <script setup>
 const props = defineProps({
-    navToggle : {
-        default : false
+    navToggle: {
+        default: false
     }
 })
+const { baseURL } = useRuntimeConfig().public
+onMounted(() => fetchData())
+
+const fetchData = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+
+    fetch(`${baseURL}/auth/`, {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify({
+            username: JSON.parse(localStorage.getItem('authTokan'))?.username,
+            password: JSON.parse(localStorage.getItem('authTokan'))?.password
+        }),
+        redirect: 'follow'
+    })
+        .then(response => response.text())
+        .then(result => {
+            const { message, isValid, error } = JSON.parse(result);
+            if (!isValid) {
+                useRouter().push({ name: 'login' })
+            }
+        })
+        .catch(error => useRouter().push({ name: 'login' }));
+}
+
+const logout = () => {
+    localStorage.setItem('authTokan', JSON.stringify({}))
+    fetchData()
+}
 </script>
 
 <template>
@@ -18,8 +49,9 @@ const props = defineProps({
                     <img src="../assets/images/avtar.svg" alt="Avtar">
                     <h3>Admin</h3>
                 </div>
-                <Button bgColor="#3b71ca" text="Logout" radius="5px" />
-                <Icon :name="navToggle ? 'mdi:close' : 'mdi:menu'" @click="navToggle = !navToggle , $emit('navtoggle' , navToggle)" class="dd-nav-collapse" size="25px" />
+                <ButtonType2 bgColor="#3b71ca" text="Logout" @click="logout()" radius="5px" />
+                <Icon :name="navToggle ? 'mdi:close' : 'mdi:menu'"
+                    @click="navToggle = !navToggle, $emit('navtoggle', navToggle)" class="dd-nav-collapse" size="25px" />
             </div>
         </div>
     </header>
@@ -27,14 +59,14 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .dd-header {
-    padding: 5px 0;  
+    padding: 5px 0;
     z-index: 99;
     font-family: 'Nunito';
     background-color: #fff;
     border-bottom: 1px solid #E4E7EC;
+
     .dd-container {
         width: 97.5%;
-        max-width: 1536px;
         margin: 0 auto;
         justify-content: space-between;
         align-items: center;
@@ -49,11 +81,12 @@ const props = defineProps({
         .dd-right {
             display: flex;
             align-items: center;
+
             .dd-user {
                 display: flex;
                 align-items: center;
                 margin: 0 15px;
-                
+
                 img {
                     height: 30px;
                 }

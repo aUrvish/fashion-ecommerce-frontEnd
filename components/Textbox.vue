@@ -1,7 +1,6 @@
 <template>
     <div class="dd-input-div">
-        <input type="text" :placeholder="placeholder">
-        <p>* error</p>
+        <input type="text" :value="value" :placeholder="placeholder" @input="$emit('atInput' , $event.target.value)">
     </div>
 </template>
 
@@ -10,6 +9,9 @@
         {
             placeholder : {
                 default : 'Name'
+            },
+            value : {
+                default : ''
             }
         }
     )

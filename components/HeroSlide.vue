@@ -73,12 +73,12 @@ const slideChangeFunc = () => {
 const itemapi = reactive(
     [
         {
-            img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt.png',
+            img: 'http://localhost:3000/_nuxt/assets/images/shirt.png',
             backColor: '#9bafca',
             desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
             subProduct: [
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shirt-green.png',
                     name: 'New Fashion',
                     brand: "Levi's",
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -86,7 +86,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-orange.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shirt-orange.png',
                     name: 'New Fashion',
                     brand: "Levi's",
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -94,7 +94,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt-red.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shirt-red.png',
                     name: 'New Fashion',
                     brand: "Levi's",
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -102,7 +102,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shirt.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shirt.png',
                     name: 'New Fashion',
                     brand: "Levi's",
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -112,12 +112,12 @@ const itemapi = reactive(
             ]
         },
         {
-            img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes.png',
+            img: 'http://localhost:3000/_nuxt/assets/images/shoes.png',
             backColor: '#07aea0',
             desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
             subProduct: [
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-ads.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shoes-ads.png',
                     name: 'New Fashion',
                     brand: 'Nike',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -125,7 +125,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-blue.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shoes-blue.png',
                     name: 'New Fashion',
                     brand: 'Nike',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -133,7 +133,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shoes.png',
                     name: 'New Fashion',
                     brand: 'Nike',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -141,7 +141,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/shoes-green.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/shoes-green.png',
                     name: 'New Fashion',
                     brand: 'Nike',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -151,12 +151,12 @@ const itemapi = reactive(
             ]
         },
         {
-            img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch.png',
+            img: 'http://localhost:3000/_nuxt/assets/images/watch.png',
             backColor: '#c7c7c7',
             desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat et quam laudantium incidunt, quoeaque! Culpa quaerat incidunt voluptates, voluptate quibusdam aut a unde consectetur at veniamblanditiis sapiente velit.",
             subProduct: [
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
                     name: 'New Fashion',
                     brand: 'Noise',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -164,7 +164,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
                     name: 'New Fashion',
                     brand: 'Noise',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -172,7 +172,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
                     name: 'New Fashion',
                     brand: 'Noise',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',
@@ -180,7 +180,7 @@ const itemapi = reactive(
                     rate: 4.5
                 },
                 {
-                    img: 'http://192.168.0.105:3000/_nuxt/assets/images/watch-color.png',
+                    img: 'http://localhost:3000/_nuxt/assets/images/watch-color.png',
                     name: 'New Fashion',
                     brand: 'Noise',
                     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, debitis?',

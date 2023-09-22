@@ -1,7 +1,6 @@
 <template>
     <div class="dd-input-div">
         <textarea type="text" rows="5" placeholder="Name"></textarea>
-        <p>* error</p>
     </div>
 </template>
 

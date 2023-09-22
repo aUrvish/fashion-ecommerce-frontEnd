@@ -8,7 +8,6 @@ const router = useRouter()
 onMounted(
   () => {
     window.addEventListener('scroll' , () => { 
-        console.log(window.scrollY);
         if(window.scrollY > 5){
             bgColor.value = '#fff'
         }else {
@@ -40,10 +39,10 @@ onMounted(
                     <NavbarLink :to="{ name: 'contact' }">Contact</NavbarLink>
                 </li>
                 <li>
-                    <Button class="dd-nav-btn" text="Login" :bgImg="getBtnColor" @click="router.push({ name : 'login'})" />
+                    <Button class="dd-nav-btn" text="Login" to="/login" :bgImg="getBtnColor" @click="router.push({ name : 'login'})" />
                 </li>
                 <li>
-                    <NuxtLink :to="{ name: 'cart' }" class="dd-call-icon" data-cart-list="10">
+                    <NuxtLink :to="{ name: 'cart' }" class="dd-call-icon" data-cart-list="">
                         <Icon name="mdi:cart" size="25px" />
                     </NuxtLink>
                 </li>
@@ -98,9 +97,9 @@ onMounted(
                         content: attr(data-cart-list);
                         color: white;
                         position: absolute;
-                        background-color: red;
-                        height: 13px;
-                        width: 13px;
+                        background-color: rgb(240, 93, 93);
+                        height: 10px;
+                        width: 10px;
                         border-radius: 50%;
                         display: grid;
                         place-items: center;

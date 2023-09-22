@@ -3,42 +3,40 @@ const props = defineProps(
     {
         isList: {
             default: false,
+        }, carddata : {
+            require : true,
         }
     }
 )
 
-// const 
+const rate = computed(() => props.carddata.rate)
+const { baseURL } = useRuntimeConfig().public
 const clikLike = ref(false)
+const image = computed(() => props.carddata?.image.split(',')[0])
 </script>
 
 <template>
     <div :class="isList ? 'dd-card-list' : 'dd-card-grid'">
         <div class="dd-card-inner">
             <div class="dd-card-head">
-                <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" class="dd-card-img" alt="card">
+                <img :src="`${baseURL}/images/${image}`" class="dd-card-img" alt="card">
                 <div class="dd-card-hover">
                     <Icon :name="clikLike ? 'mdi:cards-heart' : 'mdi:cards-heart-outline'" @click="clikLike = !clikLike" />
-                    <NuxtLink to="/">
-                        <Icon name="mdi:cart-outline" />
+                    <NuxtLink :to="{name : 'product-id', params : {id : carddata.id}}">
+                        <Icon name="mdi:arrow-right-thin" />
                     </NuxtLink>
-                    <Icon name="mdi:arrow-right-thin" />
                 </div>
             </div>
             <div class="dd-card-body">
                 <div class="dd-cat-rate">
-                    <p>Men</p>
-                    <NuxtRating class="dd-rate" :read-only="true" ratingSize="24px" inactiveColor="#eee" :ratingValue="3" />
+                    <p style="text-transform: capitalize;" >{{ carddata.catagory }}</p>
+                    <NuxtRating class="dd-rate" :read-only="true" ratingSize="24px" inactiveColor="#eee" :ratingValue="rate" />
                 </div>
-                <NuxtLink to="/" class="dd-product-name">Yellow T-Shirt</NuxtLink>
+                <NuxtLink :to="{name : 'product-id', params : {id : carddata.id}}" class="dd-product-name">{{ carddata.pname }}</NuxtLink>
                 <p class="dd-card-desc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique debitis delectus ab mollitia
-                    obcaecati ratione illo dolore, provident quibusdam minima eum! Vel, eum cumque ab cum deserunt explicabo
-                    quidem totam?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique debitis delectus ab mollitia
-                    obcaecati ratione illo dolore, provident quibusdam minima eum! Vel, eum cumque ab cum deserunt explicabo
-                    quidem totam?
+                    {{ carddata.description }}
                 </p>
-                <p class="dd-price">₹ 499.00 <del>₹ 699.00</del></p>
+                <p class="dd-price">₹ {{ Number(carddata.sell).toFixed(2) }} <del>₹ {{ Number(carddata.mrp).toFixed(2) }}</del></p>
             </div>
         </div>
     </div>

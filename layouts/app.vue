@@ -49,6 +49,7 @@ const isNavToggle = ref(false)
 
             .width-div {
                 width: 90%;
+                max-width: 1536px;
                 margin: 0 auto;
             }
 

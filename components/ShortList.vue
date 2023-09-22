@@ -15,7 +15,7 @@
     <div class="dd-short">
         <div class="dd-short-head">
             <div>
-                <h2>{{ head }}</h2>
+                <h2 style="text-transform: capitalize;" >{{ head }}</h2>
                 <p>{{ caption }}</p>
             </div>
             <NuxtLink to="/">
@@ -26,7 +26,7 @@
             <slot/>
         </div>
         <p class="dd-moble-show">
-            <NuxtLink to="/">
+            <NuxtLink :to="{name : 'product'}">
                 Show More
             </NuxtLink>
         </p>

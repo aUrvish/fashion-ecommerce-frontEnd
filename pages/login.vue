@@ -3,23 +3,64 @@
         <div class="dd-auth">
             <h1>Log in</h1>
             <p>Betcha can’t eat just one</p>
-            <form>
+            <form method="POST" @submit.prevent="loginsubmit">
                 <div>
                     <label>Email :</label>
-                    <Textbox placeholder="Email" style="margin-top: 5px;" />
+                    <Textbox placeholder="Email" style="margin-top: 5px;" :value="username" @atInput="(val) => username = val" />
                 </div>
                 <div class="dd-password">
                     <label>Password :</label>
-                    <Textbox placeholder="jone@example.com" style="margin-top: 5px;" />
+                    <Textbox placeholder="jone@example.com" style="margin-top: 5px;" :value="Password" @atInput="(val) => Password = val" />
                 </div>
-                <ButtonType2 bgColor="#3b71ca" style="width: 100%;" text="Log In" radius="5px" />
+                <ButtonType2 type="submit" bgColor="#3b71ca" style="width: 100%;" text="Log In" radius="5px" />
                 <div class="new">
-                    <NuxtLink :to="{name : 'signup'}" >Create new account?</NuxtLink>
+                    <NuxtLink :to="{ name: 'signup' }">Create new account?</NuxtLink>
                 </div>
             </form>
+            <Notification :msg="msg" :isError="isError" />
         </div>
     </div>
 </template>
+
+<script setup>
+
+
+const { baseURL } = useRuntimeConfig().public
+const username = ref(null);
+const Password = ref(null);
+const msg = ref(null)
+const isError = ref(null)
+
+const loginsubmit = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    fetch(`${baseURL}/auth/`, {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify({
+            username: username.value,
+            password: Password.value
+        }),
+        redirect: 'follow'
+    })
+        .then(response => response.text())
+        .then(result => {
+            const {message,isValid,error} = JSON.parse(result);
+            msg.value = message
+            isError.value = error
+
+            if(isValid){
+                localStorage.setItem('authTokan' , JSON.stringify({username : username.value , password : Password.value}))
+                useRouter().push({name : 'dashboard'})
+            }
+        })
+        .catch(error => {
+            msg.value = "Network error"
+            isError.value = false
+        });
+}
+</script>
 
 <style scoped lang="scss">
 .dd-login {

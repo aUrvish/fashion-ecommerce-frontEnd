@@ -4,7 +4,8 @@
             <h3>All Products</h3>
             <div class="dd-search">
                 <Icon name="mdi:magnify" />
-                <input type="search" placeholder="Search">
+                <input type="search" v-model="search" placeholder="Search" 
+                @input="$emit('searchData' , $event.target.value )" >
             </div>
         </div>
 
@@ -13,31 +14,31 @@
                 <th>
                     <div>
                         Product
-                        <Icon name="carbon:chevron-sort" />
+                        <Icon name="carbon:chevron-sort" @click="sortNumber%2==0 ? tabledata.sort((a , b) => a.id - b.id) : tabledata.sort((a , b) => b.id - a.id) , sortNumber++" />
                     </div>
                 </th>
                 <th>
                     <div>
                         Rate
-                        <Icon name="carbon:chevron-sort" />
+                        <Icon name="carbon:chevron-sort" @click="sortNumber%2==0 ? tabledata.sort((a , b) => a.rate - b.rate) : tabledata.sort((a , b) => b.rate - a.rate) , sortNumber++" />
                     </div>
                 </th>
                 <th>
                     <div>
                         Price
-                        <Icon name="carbon:chevron-sort" />
+                        <Icon name="carbon:chevron-sort" @click="sortNumber%2==0 ? tabledata.sort((a , b) => a.sell - b.sell) : tabledata.sort((a , b) => b.sell - a.sell) , sortNumber++" />
                     </div>
                 </th>
                 <th>
                     <div>
                         Reviwe
-                        <Icon name="carbon:chevron-sort" />
+                        <Icon name="carbon:chevron-sort" @click="sortNumber%2==0 ? tabledata.sort((a , b) => a.review - b.review) : tabledata.sort((a , b) => b.review - a.review) , sortNumber++" />
                     </div>
                 </th>
                 <th>
                     <div>
                         Stock
-                        <Icon name="carbon:chevron-sort" />
+                        <Icon name="carbon:chevron-sort" @click="sortNumber%2==0 ? tabledata.sort((a , b) => a.stock - b.stock) : tabledata.sort((a , b) => b.stock - a.stock) , sortNumber++" />
                     </div>
                 </th>
                 <th>
@@ -47,40 +48,56 @@
                     <p>Action</p>
                 </th>
             </tr>
-            <tr class="table-data" v-for="i in 7" :key="i">
+
+            <tr class="table-data" v-for="(tdata, index) in tabledata" :key="index">
                 <td>
                     <div class="t-product">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" class="dd-card-img"
+                        <img :src="`${baseURL}/images/${tdata.image.split(',')[0]}`" class="dd-card-img"
                             alt="card">
                         <div>
-                            <h4>Yellow T-Shirt</h4>
-                            <p>ID : <smart>0000000000000001</smart>
-                            </p>
+                            <h4>{{ tdata.pname }}</h4>
+                            <p>ID : <smart>{{ tdata.id }}</smart></p>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <p class="t-rate">4.5</p>
+                    <p class="t-rate">{{ Number(tdata.rate).toFixed(1) }}</p>
                 </td>
                 <td>
-                    <p class="t-price">₹ 500.00</p>
+                    <p class="t-price">₹ {{ Number(tdata.sell).toFixed(2) }}</p>
                 </td>
                 <td>
-                    <p class="t-reviwe">60 customers</p>
+                    <p class="t-reviwe">{{ tdata.review }} customers</p>
                 </td>
                 <td>
-                    <p class="t-stock">5 In Available</p>
+                    <p class="t-stock">{{ tdata.stock }} In Available</p>
                 </td>
                 <td>
-                    <p class="t-brand">Eva</p>
+                    <p class="t-brand">{{ tdata.brand }}</p>
                 </td>
                 <td>
-                    <slot />
+                    <slot name="action" :pid="tdata.id" />
                 </td>
             </tr>
         </table>
     </div>
 </template>
+
+<script setup>
+    const props = defineProps(
+        {
+            data : {
+                default : [] 
+            }
+        }
+    )
+    const { baseURL } = useRuntimeConfig().public
+    const tabledata = computed(() => props.data)
+    const search = ref(null)
+
+    const sortNumber = ref(0)
+
+</script>
 
 <style lang="scss" scoped>
 .dd-table {

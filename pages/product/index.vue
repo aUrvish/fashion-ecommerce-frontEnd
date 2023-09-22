@@ -5,59 +5,39 @@
                 <Icon name="mdi:window-close" class="dd-close-filter" @click="isOpenFilterSidebar = false" />
                 <div class="dd-search">
                     <Icon name="mdi:magnify" />
-                    <input type="search" placeholder="Search">
+                    <input type="search" placeholder="Search" @input="filterdata($event.target.value)" >
                 </div>
 
                 <div>
                     <h3>Category</h3>
                     <ul>
-                        <li>Men</li>
-                        <li>Women</li>
-                        <li>Child</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.catagory == 'men')" >Men</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.catagory == 'women')" >Women</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.catagory == 'baby')" >Child</li>
                     </ul>
                 </div>
                 <div>
                     <h3>Product</h3>
                     <ul>
-                        <li>Shirts & Jeans</li>
-                        <li>Sarees</li>
-                        <li>Shoes</li>
-                        <li>Watches</li>
-                        <li>Sunglasses</li>
-                        <li>Kurtas</li>
-                        <li>Baby Boys</li>
-                        <li>Baby Girls</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'jeans')" >Shirts & Jeans</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'sarees')">Sarees</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'shoes')">Shoes</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'watches')">Watches</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'sunglasses')">Sunglasses</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'kurtas')">Kurtas</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'boys')">Baby Boys</li>
+                        <li @click="alldata = fetchalldata.filter((curr , index) => curr.ptype == 'girls')">Baby Girls</li>
                     </ul>
-                </div>
-                <div>
-                    <h3>Company</h3>
-                    <select>
-                        <option v-for="(com, ind) in companyApi" :key="ind" value="com.name">{{ com.name }}</option>
-                    </select>
                 </div>
                 <div>
                     <h3>Size</h3>
                     <div class="dd-size">
-                        <button>XS</button>
-                        <button>S</button>
-                        <button>M</button>
-                        <button>L</button>
-                        <button>XL</button>
+                        <button @click="alldata = fetchalldata.filter((curr , index) => curr.size == 'xs')">XS</button>
+                        <button @click="alldata = fetchalldata.filter((curr , index) => curr.size == 's')" >S</button>
+                        <button @click="alldata = fetchalldata.filter((curr , index) => curr.size == 'm')">M</button>
+                        <button @click="alldata = fetchalldata.filter((curr , index) => curr.size == 'l')">L</button>
+                        <button @click="alldata = fetchalldata.filter((curr , index) => curr.size == 'xl')">XL</button>
                     </div>
-                </div>
-                <div>
-                    <h3>Color</h3>
-                    <div class="dd-color">
-                        <button style="background-color: #fff; outline: 1px solid #555;"></button>
-                        <button style="background-color: #000;"></button>
-                        <button style="background-color: red;"></button>
-                        <button style="background-color: #6c745d;"></button>
-                        <button style="background-color: skyblue;"></button>
-                    </div>
-                </div>
-                <div>
-                    <h3>Price</h3>
-                    <MultiRangeSlider :min="0" :max="100" :ruler="false" :min-value="0" :max-value="80" />
                 </div>
             </div>
             <div class="dd-item">
@@ -72,7 +52,7 @@
                     </div>
 
                     <div class="dd-result">
-                        <p>1,000 results</p>
+                        <p>{{ alldata.length }} results</p>
                     </div>
 
                     <select>
@@ -82,10 +62,10 @@
                 </div>
 
                 <div class="dd-sm-result">
-                    <p>1,000 results</p>
+                    <p>{{ alldata.length }} results</p>
                 </div>
                 <div class="dd-item-card" :style="`display : ${isListViwe ? 'block' : 'grid'}`">
-                    <Card v-for="i in 24" :is-list="isListViwe" />
+                    <Card v-for="(carddata , index) in alldata" :is-list="isListViwe" :carddata="carddata" :key="index" />
                 </div>
             </div>
         </div>
@@ -93,54 +73,29 @@
 </template>
 
 <script setup>
-import MultiRangeSlider from "multi-range-slider-vue";
+const { baseURL } = useRuntimeConfig().public
+const alldata = ref([])
+const fetchalldata = ref([])
+onMounted(() => {
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(result => {alldata.value = [...JSON.parse(result)] ; fetchalldata.value = [...JSON.parse(result)]})
+        .catch(error => console.log('error', error));
+})
+const filterdata = (data) => {
+    fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(
+            (result) => {
+                let newdata = JSON.parse(result);
+                alldata.value = newdata.filter((curr) => curr.pname.toLowerCase().includes(data.toLowerCase()))
+            } 
+        )
+        .catch(error => console.log('error', error));
+}
 
 const isOpenFilterSidebar = ref(false)
 const isListViwe = ref(false)
-// const cardDisplay = ref(isListViwe ? 'block' : 'grid')
-
-const companyApi = [
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/mantis.svg',
-        name: 'Mantis'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Calypso.svg',
-        name: 'Calypso'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/grass.svg',
-        name: 'Grass'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/country.svg',
-        name: 'Country'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/InfinityParker.svg',
-        name: 'Infinity Parker'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Kinetic.svg',
-        name: 'Kinetic'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/PacificTrim.svg',
-        name: 'Pacidic Trim'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/omega.svg',
-        name: 'Omega'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Wheelapp.svg',
-        name: 'Wheelapp'
-    },
-    {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/YellowBook.svg',
-        name: 'Yellow Book'
-    },
-]
 </script>
 
 <style scoped lang="scss">

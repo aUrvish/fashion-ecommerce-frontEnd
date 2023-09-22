@@ -2,14 +2,14 @@
     <NuxtLayout name="default">
         <div class="dd-cart">
             <div class="dd-cart-item">
-                <h2 style="margin-top: 0;">Cart (5 Item)</h2>
-                <div class="cart" v-for="i in 5" :key="i">
+                <h2 style="margin-top: 0;">Cart ({{ cartdatacom.length }} Item)</h2>
+                    <div class="cart" v-for="(cart ,index) in cartdatacom" :key="index">
                     <div class="dd-cart-img-div">
-                        <img src="http://192.168.0.105:3000/_nuxt/assets/images/shirt-green.png" alt="card">
+                        <img :src="`${baseURL}/images/${cart.image[0]}`" alt="card">
                     </div>
                     <div class="dd-cart-info-div">
                         <div class="dd-cart-product">
-                            <NuxtLink to="/" class="dd-product-name">Yellow T-Shirt</NuxtLink>
+                            <NuxtLink :to="`/product/${cart.id}`" class="dd-product-name">{{ cart.name }}</NuxtLink>
                             <div class="total-item">
                                 <button>-</button>
                                 <p>3</p>
@@ -18,13 +18,13 @@
                         </div>
                         <p>color : <smart>Red</smart>
                         </p>
-                        <p>category : <smart>Men</smart>
+                        <p>category : <smart style="text-transform: capitalize;" >{{ cart.catagory }}</smart>
                         </p>
-                        <p>Size : <smart>M</smart>
+                        <p>Size : <smart style="text-transform: capitalize;" >{{ cart.psize }}</smart>
                         </p>
                         <div class="dd-cart-footer">
-                            <button>Remove</button>
-                            <p class="dd-price">₹ 499.00 <del>₹ 699.00</del></p>
+                            <button @click="removeToCart(index)" >Remove</button>
+                            <p class="dd-price">₹ {{ Number(cart.sell).toFixed(2) }} <del>₹ {{ Number(cart.mrp).toFixed(2) }}</del></p>
                         </div>
                     </div>
                 </div>
@@ -59,6 +59,22 @@
         </div>
     </NuxtLayout>
 </template>
+
+<script setup>
+const { baseURL } = useRuntimeConfig().public
+    const cartdata = ref([])
+    const cartdatacom = computed(() => cartdata.value)
+    onMounted(() => localdata())
+    
+    const localdata = () => {
+        cartdata.value = JSON.parse(localStorage.getItem('fashion'))
+    }
+
+    const removeToCart = (index) => {
+        localStorage.setItem('fashion' , JSON.stringify(cartdata.value.filter((curr , ind) => index != ind)))
+        localdata()
+    }
+</script>
 
 <style lang="scss" scoped>
 .dd-cart {

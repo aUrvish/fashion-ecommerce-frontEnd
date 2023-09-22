@@ -1,6 +1,6 @@
 <template>
     <div class="dd-baner-div">
-        <img src="http://192.168.0.105:3000/_nuxt/assets/images/banner.png" alt="banner">
+        <img src="http://localhost:3000/_nuxt/assets/images/banner.png" alt="banner">
     </div>
 </template>
 

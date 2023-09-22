@@ -1,36 +1,42 @@
 <script setup>
 const companyApi = [
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/mantis.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/mantis.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Calypso.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Calypso.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/grass.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/grass.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/country.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/country.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/InfinityParker.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/InfinityParker.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Kinetic.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Kinetic.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/PacificTrim.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/PacificTrim.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/omega.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/omega.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/Wheelapp.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/Wheelapp.svg'
     },
     {
-        logo: 'http://192.168.0.105:3000/_nuxt/assets/images/company/YellowBook.svg'
+        logo: 'http://localhost:3000/_nuxt/assets/images/company/YellowBook.svg'
     },
 ]
+const { baseURL } = useRuntimeConfig().public
+const alldata = ref([])
+onMounted(() => fetch(`${baseURL}/product`, { method: 'GET', redirect: 'follow' })
+    .then(response => response.text())
+    .then(result => alldata.value = [...JSON.parse(result)])
+    .catch(error => console.log('error', error)))
 </script>
 
 <template>
@@ -73,32 +79,35 @@ const companyApi = [
             </div>
 
             <!-- best offer -->
+            <!-- <ShortList head="Best Offer">
+                    <Card v-for="i in 4" :key="i" />
+                </ShortList> -->
             <ShortList head="Best Offer">
-                <Card v-for="i in 4" :key="i" />
+                <Card v-for="(card, index) in alldata.filter((curr , ind) => ind < 4)" :carddata="card" :key="index" />
             </ShortList>
 
             <!-- category -->
             <div class="dd-cat">
                 <div class="dd-cat-female">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-female.png" alt="">
+                    <NuxtLink :to="{name : 'product'}">
+                        <img src="@/assets/images/cat-female.png" alt="Female">
                     </NuxtLink>
                 </div>
                 <div class="dd-cat-child">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-child.png" alt="">
+                    <NuxtLink :to="{name : 'product'}">
+                        <img src="@/assets/images/cat-child.png" alt="Child">
                     </NuxtLink>
                 </div>
                 <div class="dd-cat-male">
-                    <NuxtLink to="#">
-                        <img src="@/assets/images/cat-male.png" alt="">
+                    <NuxtLink :to="{name : 'product'}">
+                        <img src="@/assets/images/cat-male.png" alt="Malee">
                     </NuxtLink>
                 </div>
             </div>
 
             <!-- trending collection -->
             <ShortList head="Trending Collection">
-                <Card v-for="i in 12" :key="i" />
+                <Card v-for="(card, index) in alldata" :carddata="card" :key="index" />
             </ShortList>
         </div>
     </NuxtLayout>
